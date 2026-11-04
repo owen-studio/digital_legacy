@@ -1,0 +1,4 @@
+data/
+static/assets/
+.venv/
+__pycache__/

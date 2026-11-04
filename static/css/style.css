@@ -1,0 +1,100 @@
+/* Reset default browser margins/padding so spacing is consistent */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Page-level styling: serif font, warm off-white background, centered with a max width */
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #faf9f6;
+    color: #2c2c2c;
+    padding: 3rem 1.5rem;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+/* Date header: subtle, lowercase, slightly spaced out */
+h1 {
+    font-size: 1.1rem;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    text-transform: lowercase;
+    color: #888;
+    margin-bottom: 2.5rem;
+}
+
+/* Each item card — separated by a thin bottom border */
+.item {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #e0ddd8;
+    padding-bottom: 2.5rem;
+}
+/* No border on the very last item */
+.item:last-child { border-bottom: none; }
+
+/* Type label (e.g. "NOTE", "PHOTO") — small, uppercase, muted */
+.item-type {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #aaa;
+    margin-bottom: 1rem;
+}
+
+/* Images scale down to fit the container and get slightly rounded corners */
+.item-file img {
+    max-width: 100%;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+/* Text file contents shown in a monospace font on a warm grey background */
+.item-file pre {
+    background: #f0eee9;
+    padding: 1.25rem;
+    border-radius: 4px;
+    font-family: "Courier New", monospace;
+    font-size: 0.9rem;
+    white-space: pre-wrap;   /* wrap long lines instead of scrolling */
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* Thoughts text — italic to feel personal / reflective */
+.item-thoughts {
+    font-size: 1rem;
+    line-height: 1.7;
+    font-style: italic;
+    color: #444;
+    margin-bottom: 0.75rem;
+}
+
+/* Date stamp — small and muted at the bottom */
+.item-date {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+/* Reset button — small, understated, sits at the bottom of the page */
+.reset-btn {
+    margin-top: 2rem;
+    padding: 0.5rem 1.25rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    color: #aaa;
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.reset-btn:hover {
+    color: #666;
+    border-color: #bbb;
+}
+
+/* Message shown after a reset */
+.reset-message {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #888;
+    margin-top: 2rem;
+}
