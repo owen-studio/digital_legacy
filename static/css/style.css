@@ -73,8 +73,8 @@ h1 {
     color: #aaa;
 }
 
-/* Reset button — small, understated, sits at the bottom of the page */
-.reset-btn {
+/* Footer button — small, understated, sits at the bottom of the page */
+.footer-btn {
     margin-top: 2rem;
     padding: 0.5rem 1.25rem;
     font-family: Georgia, "Times New Roman", serif;
@@ -86,7 +86,7 @@ h1 {
     border-radius: 4px;
     cursor: pointer;
 }
-.reset-btn:hover {
+.footer-btn:hover {
     color: #666;
     border-color: #bbb;
 }
@@ -97,4 +97,40 @@ h1 {
     line-height: 1.7;
     color: #888;
     margin-top: 2rem;
+}
+
+/* Save button — solid deep blue with white text */
+.save-btn {
+    margin-top: 2rem;
+    padding: 0.25rem 0.5rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    color: #fff;
+    background: #0b00a8;
+    border: 1px solid #0b00a8;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.save-btn:hover {
+    background: #b0abff;
+    border: 1px solid #b0abff;
+
+}
+
+/* Unsave button — outline only, deep blue text and border */
+.unsave-btn {
+    margin-top: 2rem;
+    padding: 0.25rem 0.5rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    color: #0b00a8;
+    background: none;
+    border: 1px solid #0b00a8;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.unsave-btn:hover {
+    background: #dfddff;
 }

@@ -35,11 +35,27 @@ async function renderFile(fileName) {
     return pre;
 }
 
+async function saveData(itemId, saved) {
+    try {
+        const res = await fetch("/api/save", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ item_id: itemId, saved: saved })
+        });
+        if (!res.ok) {
+            throw new Error(`save failed with status ${res.status}`);
+        }
+    } catch (err) {
+        console.error("Failed to save:", err);
+        alert("something went wrong saving the data");
+    }
+}
+
 // Build the HTML for a single item: type label, the file itself, thoughts, and date.
 // We use createElement for everything instead of innerHTML so that we never
 // accidentally destroy DOM nodes we've already attached (innerHTML re-parses
 // the entire content, which would wipe out our file element).
-async function renderItem(item) {
+async function renderItem(id, item) {
     const div = document.createElement("div");
     div.className = "item";
 
@@ -67,6 +83,18 @@ async function renderItem(item) {
     dateEl.textContent = item.created_at;
     div.appendChild(dateEl);
 
+    // Save button — text and style reflect current saved state, and clicks toggle it
+    const saveBtn = document.createElement("button");
+    saveBtn.className = item.saved ? "unsave-btn" : "save-btn";
+    saveBtn.textContent = item.saved ? "unsave" : "save";
+    saveBtn.addEventListener("click", async () => {
+        await saveData(id, item.saved);
+        item.saved = !item.saved;
+        saveBtn.className = item.saved ? "unsave-btn" : "save-btn";
+        saveBtn.textContent = item.saved ? "unsave" : "save";
+    });
+    div.appendChild(saveBtn);
+
     return div;
 }
 
@@ -84,14 +112,21 @@ async function load() {
 
         // Loop through each item and append it to the page
         const container = document.getElementById("items");
-        for (const item of data.items) {
-            container.appendChild(await renderItem(item));
+        for (const [id, item] of Object.entries(data.items)) {
+            container.appendChild(await renderItem(id, item));
         }
+        if (Object.keys(data.items) === 0) {
+            document.getElementById("items").textContent = "no more data";
+        }
+
     } catch (err) {
         console.error("Failed to load today's data:", err);
         document.getElementById("header").textContent = "something went wrong";
     }
 }
+
+
+// FOOTER
 
 // Calls the reset endpoint, then replaces the page with a confirmation message
 async function resetData() {
@@ -116,15 +151,34 @@ async function resetData() {
     }
 }
 
+async function getNewDataForToday() {
+    try {
+        const res = await fetch("/api/get_new_data_for_today", { method: "POST" });
+        if (!res.ok) {
+            throw new Error(`getting new data failed with status ${res.status}`);
+        }
+        window.location.reload();
+    } catch (err) {
+        console.error("Failed to reset:", err);
+        alert("something went wrong getting new data for today");
+    }
+}
+
 // Adds the reset button to the footer area at the bottom of the page
-function addResetButton() {
+function addFooterButtons() {
     const footer = document.getElementById("footer");
     const btn = document.createElement("button");
-    btn.className = "reset-btn";
+    btn.className = "footer-btn";
     btn.textContent = "reset";
     btn.addEventListener("click", resetData);
     footer.appendChild(btn);
+
+    const newDataButton = document.createElement("button");
+    newDataButton.className = "footer-btn";
+    newDataButton.textContent = "show me new data please";
+    newDataButton.addEventListener("click", getNewDataForToday);
+    footer.appendChild(newDataButton);
 }
 
 // Kick everything off
-load().then(addResetButton);
+load().then(addFooterButtons);

@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify, send_from_directory, request
 
 # Create the Flask app and tell it where static files live (css, js, images, etc.)
 app = Flask(__name__, static_folder="static")
@@ -28,11 +28,11 @@ def create_todays_data():
     next_five_ids = ids[:5]
 
     # Build the items for today's file
-    todays_items = []
+    todays_items = {}
     for item_id in next_five_ids:
         item = my_data["data"][item_id]
-        item["id"] = item_id
-        todays_items += [item]
+        item["saved"] = 0
+        todays_items[item_id] = item
 
     # Move those 5 items from data → archived_data
     for item_id in next_five_ids:
@@ -86,6 +86,47 @@ def asset_file(filename):
     return send_from_directory("static/assets", filename)
 
 
+### SAVE DATA ENDPOINTS ###
+
+@app.route("/api/save", methods=["POST"])
+def save():
+    body = request.get_json()
+    item_id = body["item_id"]
+    saved = body["saved"]
+
+    # saved is a boolean -- if true, it means this item is already saved and is being unsaved
+    # if it is false, it means this item is being saved now
+
+    with open("data/my_data.json") as f:
+        my_data = json.load(f)
+
+    if not saved:
+        # move piece of data from archived to saved
+        my_data["saved_data"][item_id] = my_data["archived_data"].pop(item_id)
+    else:
+        # move piece of data from saved to archived
+        my_data["archived_data"][item_id] = my_data["saved_data"].pop(item_id)
+
+    # Write the updated my_data.json
+    with open("data/my_data.json", "w") as f:
+        json.dump(my_data, f, indent=4)
+
+    
+    with open("data/todays_data.json") as f:
+        todays_data = json.load(f)
+
+    if not saved:
+        todays_data["items"][item_id]["saved"] = 1
+    else:
+        todays_data["items"][item_id]["saved"] = 0 
+
+    with open("data/todays_data.json", "w") as f:
+        json.dump(todays_data, f, indent=4)
+
+    return jsonify({"status": "ok"})
+
+### FOOTER ENDPOINTS ###
+
 # Resets my_data.json by moving everything in saved_data and archived_data back into data.
 # Uses POST because it modifies data on the server.
 @app.route("/api/reset", methods=["POST"])
@@ -114,6 +155,12 @@ def reset():
     return jsonify({"status": "ok", "total_items": len(my_data["data"])})
 
 
+@app.route("/api/get_new_data_for_today", methods=["POST"])
+def get_new_data_for_today():
+    data = create_todays_data()
+    return jsonify(data)
+
+
 if __name__ == "__main__":
     # debug=True auto-reloads the server when you change code
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
