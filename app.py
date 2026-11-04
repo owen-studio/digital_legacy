@@ -12,12 +12,11 @@ def index():
     return send_from_directory("static", "index.html")
 
 
-"""
-TODO:
-API endpoint to determine if we need to re-create todays_data.json
-API endpoint to re-create todays_data.json
-API endpoint to modify list elements in my_data.json (specifically the status values)
-"""
+# Saved page — shows all saved items
+@app.route("/saved")
+def saved():
+    return send_from_directory("static", "saved.html")
+
 
 def create_todays_data():
     with open("data/my_data.json") as f:
@@ -87,6 +86,14 @@ def asset_file(filename):
 
 
 ### SAVE DATA ENDPOINTS ###
+
+@app.route("/api/get_saved", methods=["GET"])
+def get_saved():
+    with open("data/my_data.json") as f:
+        my_data = json.load(f)
+    
+    print(my_data["saved_data"])
+    return jsonify(my_data["saved_data"])
 
 @app.route("/api/save", methods=["POST"])
 def save():

@@ -1,14 +1,43 @@
 /* Reset default browser margins/padding so spacing is consistent */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Page-level styling: serif font, warm off-white background, centered with a max width */
+/* Page-level styling: serif font, warm off-white background */
 body {
     font-family: Georgia, "Times New Roman", serif;
     background: #faf9f6;
     color: #2c2c2c;
+    margin: 0;
+}
+
+/* Left-hand sidebar navigation */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 140px;
+    height: 100%;
+    padding: 2.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-right: 1px solid #e0ddd8;
+}
+
+.nav-link {
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    color: #888;
+}
+.nav-link:hover {
+    color: #2c2c2c;
+}
+
+/* Main content area — offset to the right to clear the sidebar */
+.content {
+    margin-left: 140px;
     padding: 3rem 1.5rem;
     max-width: 640px;
-    margin: 0 auto;
 }
 
 /* Date header: subtle, lowercase, slightly spaced out */

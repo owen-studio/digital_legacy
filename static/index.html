@@ -9,14 +9,25 @@
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <!-- The date header — app.js fills this in dynamically -->
-    <h1 id="header"></h1>
+    <!-- Left-hand navigation bar -->
+    <nav class="sidebar">
+        <a href="/" class="nav-link">home</a>
+        <a href="/saved" class="nav-link">saved</a>
+    </nav>
 
-    <!-- Container where app.js will insert each item from today's data -->
-    <div id="items"></div>
+    <!-- Main content area, shifted right to make room for the sidebar -->
+    <main class="content">
+        <!-- The date header — app.js fills this in dynamically -->
+        <h1 id="header"></h1>
 
-    <div id="footer"></div>
+        <!-- Container where app.js will insert each item from today's data -->
+        <div id="items"></div>
 
+        <div id="footer"></div>
+    </main>
+
+    <!-- Shared helpers (renderItem, renderFile, saveData) used across pages -->
+    <script src="/static/js/helpers.js"></script>
     <!-- Load the main JavaScript file that fetches data and builds the page -->
     <script src="/static/js/app.js"></script>
 </body>
