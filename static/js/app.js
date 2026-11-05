@@ -7,8 +7,17 @@ async function load() {
         }
         const data = await res.json();
 
+        const resDayData = await fetch("/api/days");
+        if (!resDayData.ok) {
+            throw new Error(`API returned ${resDayData.status}`);
+        }
+        const dayData = await resDayData.json();
+
         // Set the page header to today's date from the JSON
         document.getElementById("header").textContent = data.date;
+
+
+        document.getElementById("subheader").textContent = "day " + dayData.day + " of " + dayData.total;
 
         // Loop through each item and append it to the page
         const container = document.getElementById("items");
@@ -17,6 +26,7 @@ async function load() {
         }
         if (Object.keys(data.items).length === 0) {
             document.getElementById("items").textContent = "there are no files left. you've reached the end. i love you. goodbye my friend";
+            document.getElementById("subheader").textContent = ""
         }
 
     } catch (err) {
@@ -40,6 +50,7 @@ async function resetData() {
         document.getElementById("header").textContent = "";
         document.getElementById("items").innerHTML = "";
         document.getElementById("footer").innerHTML = "";
+        document.getElementById("subheader").textContent = "";
 
         const msg = document.createElement("p");
         msg.className = "reset-message";

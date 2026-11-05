@@ -41,6 +41,7 @@ def create_todays_data():
         # this adds to archived_data and removes from data in 1 line!
         my_data["archived_data"][item_id] = my_data["data"].pop(item_id)
 
+    my_data["day"] += 1
     # Write the updated my_data.json (those 5 items are now archived)
     with open("data/my_data.json", "w") as f:
         json.dump(my_data, f, indent=4)
@@ -72,6 +73,14 @@ def get_todays_data():
     else:
         data = create_todays_data()
         return jsonify(data)
+
+
+@app.route("/api/days")
+def get_day_data():
+    with open("data/my_data.json") as f:
+        my_data = json.load(f)
+    
+    return jsonify({"day": my_data["day"], "total": my_data["total_days"]})
 
 
 # API endpoint that the frontend calls to get today's data.
@@ -153,6 +162,8 @@ def reset():
     # Move all archived items back into data
     my_data["data"].update(my_data["archived_data"])
     my_data["archived_data"] = {}
+
+    my_data["day"] = 0
 
     # Write the reset version back to disk
     with open("data/my_data.json", "w") as f:
