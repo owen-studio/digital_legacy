@@ -16,7 +16,7 @@ async function load() {
             container.appendChild(await renderItem(id, item));
         }
         if (Object.keys(data.items).length === 0) {
-            document.getElementById("items").textContent = "no more data";
+            document.getElementById("items").textContent = "there are no files left. you've reached the end. i love you. goodbye my friend";
         }
 
     } catch (err) {

@@ -14,7 +14,7 @@ async function load() {
             container.appendChild(await renderItem(id, item));
         }
         if (Object.keys(data).length === 0) {
-            document.getElementById("items").textContent = "no saved data";
+            document.getElementById("items").textContent = "nothing has been saved (yet)";
         }
 
     } catch (err) {

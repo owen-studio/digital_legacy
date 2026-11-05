@@ -1,10 +1,122 @@
+/* FONTS */
+
+/* Velvelyne - 4 weights */
+@font-face {
+    font-family: 'Velvelyne';
+    src: url('../fonts/Velvelyne-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Velvelyne';
+    src: url('../fonts/Velvelyne-Book.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Velvelyne';
+    src: url('../fonts/Velvelyne-Regular.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Velvelyne';
+    src: url('../fonts/Velvelyne-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  /* Funnel Sans - Variable font */
+  @font-face {
+    font-family: 'Funnel Sans';
+    src: url('../fonts/FunnelSans-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Funnel Sans';
+    src: url('../fonts/FunnelSans-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+  }
+  
+  /* Jacquarda Bastarda 9 */
+  @font-face {
+    font-family: 'Jacquarda Bastarda';
+    src: url('../fonts/JacquardaBastarda9-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  /* My font */
+  @font-face {
+    font-family: 'Secondfont_two-Regular';
+    src: url('../fonts/Secondfont_two-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* Satoshi - Variable font */
+  @font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi-Variable.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+  
+  /* Takako 8 and 16 bit */
+  @font-face {
+    font-family: 'Takako8bit';
+    src: url('../fonts/Takako-8bit.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Takako16bit';
+    src: url('../fonts/Takako-16bit.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* Ffffff */
+  @font-face {
+    font-family: 'Ffffff';
+    src: url('../fonts/Fffffff.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'SyneMono';
+    src: url('../fonts/SyneMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+/*   
+  --v2-font-heading: 'Velvelyne', Georgia, serif;
+  --v2-font-body: 'Funnel Sans', system-ui, sans-serif;
+  --v2-font-accent: 'Velvelyne', cursive;
+  --v2-font-display: 'Jacquarda Bastarda', serif;
+
+  --v2-font-heading-alt: 'Ffffff', system-ui, sans-serif;
+  --v2-font-body-alt: 'Takako8bit', system-ui, sans-serif;
+  */
+
 /* Reset default browser margins/padding so spacing is consistent */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* Page-level styling: serif font, warm off-white background */
 body {
-    font-family: Georgia, "Times New Roman", serif;
-    background: #faf9f6;
+    font-family: 'Funnel Sans', system-ui, sans-serif;
+    font-weight: 100;
+    letter-spacing: 0.05rem;
+    background: #fff3fc;
     color: #2c2c2c;
     margin: 0;
 }
@@ -20,7 +132,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    border-right: 1px solid #e0ddd8;
+    /* border-right: 1px solid #e0ddd8; */
 }
 
 .nav-link {
@@ -42,18 +154,19 @@ body {
 
 /* Date header: subtle, lowercase, slightly spaced out */
 h1 {
-    font-size: 1.1rem;
+    font-family: 'SyneMono', system-ui, sans-serif;
+    font-size: 2rem;
     font-weight: normal;
     letter-spacing: 0.05em;
     text-transform: lowercase;
-    color: #888;
+    color: #0b00a8;
     margin-bottom: 2.5rem;
 }
 
 /* Each item card — separated by a thin bottom border */
 .item {
     margin-bottom: 3rem;
-    border-bottom: 1px solid #e0ddd8;
+    /* border-bottom: 1px solid #e0ddd8; */
     padding-bottom: 2.5rem;
 }
 /* No border on the very last item */
@@ -61,7 +174,8 @@ h1 {
 
 /* Type label (e.g. "NOTE", "PHOTO") — small, uppercase, muted */
 .item-type {
-    font-size: 0.75rem;
+    font-family: 'SyneMono', system-ui, sans-serif;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: #aaa;
@@ -77,10 +191,11 @@ h1 {
 
 /* Text file contents shown in a monospace font on a warm grey background */
 .item-file pre {
-    background: #f0eee9;
+    background: #ffd7f6;
+    border: 1px solid #ffadec;
     padding: 1.25rem;
     border-radius: 4px;
-    font-family: "Courier New", monospace;
+    font-family: "SyneMono", monospace;
     font-size: 0.9rem;
     white-space: pre-wrap;   /* wrap long lines instead of scrolling */
     line-height: 1.6;
@@ -89,9 +204,9 @@ h1 {
 
 /* Thoughts text — italic to feel personal / reflective */
 .item-thoughts {
-    font-size: 1rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.05rem;
     line-height: 1.7;
-    font-style: italic;
     color: #444;
     margin-bottom: 0.75rem;
 }
@@ -99,14 +214,16 @@ h1 {
 /* Date stamp — small and muted at the bottom */
 .item-date {
     font-size: 0.8rem;
+    letter-spacing: 0.05rem;
     color: #aaa;
 }
 
 /* Footer button — small, understated, sits at the bottom of the page */
 .footer-btn {
     margin-top: 2rem;
+    margin-right: 1rem;
     padding: 0.5rem 1.25rem;
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "SyneMono", monospace;
     font-size: 0.8rem;
     letter-spacing: 0.05em;
     color: #aaa;
@@ -130,9 +247,9 @@ h1 {
 
 /* Save button — solid deep blue with white text */
 .save-btn {
-    margin-top: 2rem;
+    margin-top: 1rem;
     padding: 0.25rem 0.5rem;
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "SyneMono", monospace;
     font-size: 0.8rem;
     letter-spacing: 0.05em;
     color: #fff;
@@ -149,9 +266,9 @@ h1 {
 
 /* Unsave button — outline only, deep blue text and border */
 .unsave-btn {
-    margin-top: 2rem;
+    margin-top: 1rem;
     padding: 0.25rem 0.5rem;
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "SyneMono", monospace;
     font-size: 0.8rem;
     letter-spacing: 0.05em;
     color: #0b00a8;

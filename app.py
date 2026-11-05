@@ -9,7 +9,7 @@ app = Flask(__name__, static_folder="static")
 # When someone visits the root URL ("/"), serve the main HTML page
 @app.route("/")
 def index():
-    return send_from_directory("static", "index.html")
+    return send_from_directory("static", "info.html")
 
 
 # Saved page — shows all saved items
@@ -17,9 +17,9 @@ def index():
 def saved():
     return send_from_directory("static", "saved.html")
 
-@app.route("/info")
+@app.route("/today")
 def info():
-    return send_from_directory("static", "info.html")
+    return send_from_directory("static", "index.html")
 
 def create_todays_data():
     with open("data/my_data.json") as f:
