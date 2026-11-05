@@ -155,11 +155,35 @@ body {
     color: #b0abff;
 }
 
-/* Main content area — offset to the right to clear the sidebar */
+/* Fade in (with a tiny upward drift) */
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Main content area — offset to the right to clear the sidebar.
+   Fades in whenever a page loads, so it doesn't just snap into view. */
 .content {
     margin-left: 140px;
     padding: 3rem 1.5rem;
     max-width: 640px;
+    animation: fade-in 1s ease-out both;
+}
+
+/* Items are added by JS after the data arrives, so they get their own fade.
+   "both" keeps them invisible during the delay, then holds the final state. */
+.item {
+    animation: fade-in 1s ease-out both;
+}
+.item:nth-child(1) { animation-delay: 0.1s; }
+.item:nth-child(2) { animation-delay: 0.2s; }
+.item:nth-child(3) { animation-delay: 0.3s; }
+.item:nth-child(4) { animation-delay: 0.4s; }
+.item:nth-child(5) { animation-delay: 0.5s; }
+
+/* Respect users who've asked their OS to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .content, .item { animation: none; }
 }
 
 /* Date header: subtle, lowercase, slightly spaced out */
