@@ -13,7 +13,7 @@ async function load() {
         for (const [id, item] of Object.entries(data)) {
             container.appendChild(await renderItem(id, item));
         }
-        if (Object.keys(data) === 0) {
+        if (Object.keys(data).length === 0) {
             document.getElementById("items").textContent = "no saved data";
         }
 

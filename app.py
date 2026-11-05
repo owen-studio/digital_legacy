@@ -17,6 +17,9 @@ def index():
 def saved():
     return send_from_directory("static", "saved.html")
 
+@app.route("/info")
+def info():
+    return send_from_directory("static", "info.html")
 
 def create_todays_data():
     with open("data/my_data.json") as f:
@@ -110,9 +113,11 @@ def save():
     if not saved:
         # move piece of data from archived to saved
         my_data["saved_data"][item_id] = my_data["archived_data"].pop(item_id)
+        my_data["saved_data"][item_id]["saved"] = 1
     else:
         # move piece of data from saved to archived
         my_data["archived_data"][item_id] = my_data["saved_data"].pop(item_id)
+        my_data["archived_data"][item_id]["saved"] = 0
 
     # Write the updated my_data.json
     with open("data/my_data.json", "w") as f:

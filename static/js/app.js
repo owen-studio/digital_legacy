@@ -15,7 +15,7 @@ async function load() {
         for (const [id, item] of Object.entries(data.items)) {
             container.appendChild(await renderItem(id, item));
         }
-        if (Object.keys(data.items) === 0) {
+        if (Object.keys(data.items).length === 0) {
             document.getElementById("items").textContent = "no more data";
         }
 
